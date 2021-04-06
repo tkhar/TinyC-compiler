@@ -1,0 +1,14 @@
+Haris Themistoklis - CS 74 - Compilers
+
+Run 'make' to construct the executable 'CreateASTandIR'.
+
+Run './createASTandIR testfile' to perform lexical, syntax and semantic analysis
+(lex and yacc) and to generate LLVM IR from the AST.
+
+Testfiles lie in the 'Testing' directory.
+
+Run 'clang main.c resultingIR.ll' to generate an executable made from this IR.
+
+In generating the IR and in some instances in yacc, memory has not been thoroughly
+freed.
+

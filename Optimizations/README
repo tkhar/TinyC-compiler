@@ -1,0 +1,15 @@
+Haris Themistoklis, CS 57 - Compilers
+
+11 / 2 / 19
+
+Part 2 - Optimizations
+
+To make the testing file, run 'make test' after modifying the file which you
+want to run. The testing files lie in the testing/ folder.
+
+Run 'make' to make the optimization executable.
+
+Run './optimizations testFile.ll' to produce the optimized llvm code. It will be in
+a file called 'testOpt.ll'
+
+Run 'clang main.c testOpt.ll' to run an executable

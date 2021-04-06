@@ -1,0 +1,937 @@
+   0  $accept : program $end
+
+   1  program : extern extern function
+
+   2  extern : EXTERN VOID PRINT '(' INT ')' ';'
+   3         | EXTERN INT READ '(' VOID ')' ';'
+
+   4  function : INT id '(' arg ')' stmt
+
+   5  arg : INT id
+   6      |
+
+   7  stmt : INT id ';'
+   8       | var '=' expr ';'
+   9       | var '=' read_call ';'
+  10       | IF '(' r_expr ')' stmt
+  11       | IF '(' r_expr ')' stmt ELSE stmt
+  12       | WHILE '(' r_expr ')' stmt
+  13       | block_begin block_stmt block_end
+  14       | RETURN '(' expr ')' ';'
+  15       | PRINT '(' id ')' ';'
+
+  16  block_begin : '{'
+
+  17  block_end : '}'
+
+  18  block_stmt : stmt block_stmt
+  19             | stmt
+
+  20  read_call : READ '(' ')'
+
+  21  expr : term
+  22       | b_expr
+  23       | u_expr
+
+  24  b_expr : term '+' term
+  25         | term '-' term
+  26         | term '*' term
+  27         | term '/' term
+
+  28  u_expr : '-' term
+
+  29  r_expr : expr '>' expr
+  30         | expr '<' expr
+  31         | expr EQ expr
+  32         | expr LE expr
+  33         | expr GE expr
+  34         | expr NE expr
+
+  35  term : var
+  36       | const
+
+  37  var : id
+
+  38  const : INTEGER
+
+state 0
+	$accept : . program $end  (0)
+
+	EXTERN  shift 1
+	.  error
+
+	program  goto 2
+	extern  goto 3
+
+
+state 1
+	extern : EXTERN . VOID PRINT '(' INT ')' ';'  (2)
+	extern : EXTERN . INT READ '(' VOID ')' ';'  (3)
+
+	INT  shift 4
+	VOID  shift 5
+	.  error
+
+
+state 2
+	$accept : program . $end  (0)
+
+	$end  accept
+
+
+state 3
+	program : extern . extern function  (1)
+
+	EXTERN  shift 1
+	.  error
+
+	extern  goto 6
+
+
+state 4
+	extern : EXTERN INT . READ '(' VOID ')' ';'  (3)
+
+	READ  shift 7
+	.  error
+
+
+state 5
+	extern : EXTERN VOID . PRINT '(' INT ')' ';'  (2)
+
+	PRINT  shift 8
+	.  error
+
+
+state 6
+	program : extern extern . function  (1)
+
+	INT  shift 9
+	.  error
+
+	function  goto 10
+
+
+state 7
+	extern : EXTERN INT READ . '(' VOID ')' ';'  (3)
+
+	'('  shift 11
+	.  error
+
+
+state 8
+	extern : EXTERN VOID PRINT . '(' INT ')' ';'  (2)
+
+	'('  shift 12
+	.  error
+
+
+state 9
+	function : INT . id '(' arg ')' stmt  (4)
+
+	id  shift 13
+	.  error
+
+
+state 10
+	program : extern extern function .  (1)
+
+	.  reduce 1
+
+
+state 11
+	extern : EXTERN INT READ '(' . VOID ')' ';'  (3)
+
+	VOID  shift 14
+	.  error
+
+
+state 12
+	extern : EXTERN VOID PRINT '(' . INT ')' ';'  (2)
+
+	INT  shift 15
+	.  error
+
+
+state 13
+	function : INT id . '(' arg ')' stmt  (4)
+
+	'('  shift 16
+	.  error
+
+
+state 14
+	extern : EXTERN INT READ '(' VOID . ')' ';'  (3)
+
+	')'  shift 17
+	.  error
+
+
+state 15
+	extern : EXTERN VOID PRINT '(' INT . ')' ';'  (2)
+
+	')'  shift 18
+	.  error
+
+
+state 16
+	function : INT id '(' . arg ')' stmt  (4)
+	arg : .  (6)
+
+	INT  shift 19
+	')'  reduce 6
+
+	arg  goto 20
+
+
+state 17
+	extern : EXTERN INT READ '(' VOID ')' . ';'  (3)
+
+	';'  shift 21
+	.  error
+
+
+state 18
+	extern : EXTERN VOID PRINT '(' INT ')' . ';'  (2)
+
+	';'  shift 22
+	.  error
+
+
+state 19
+	arg : INT . id  (5)
+
+	id  shift 23
+	.  error
+
+
+state 20
+	function : INT id '(' arg . ')' stmt  (4)
+
+	')'  shift 24
+	.  error
+
+
+state 21
+	extern : EXTERN INT READ '(' VOID ')' ';' .  (3)
+
+	.  reduce 3
+
+
+state 22
+	extern : EXTERN VOID PRINT '(' INT ')' ';' .  (2)
+
+	.  reduce 2
+
+
+state 23
+	arg : INT id .  (5)
+
+	.  reduce 5
+
+
+state 24
+	function : INT id '(' arg ')' . stmt  (4)
+
+	id  shift 25
+	WHILE  shift 26
+	IF  shift 27
+	INT  shift 28
+	PRINT  shift 29
+	RETURN  shift 30
+	'{'  shift 31
+	.  error
+
+	stmt  goto 32
+	var  goto 33
+	block_begin  goto 34
+
+
+state 25
+	var : id .  (37)
+
+	.  reduce 37
+
+
+state 26
+	stmt : WHILE . '(' r_expr ')' stmt  (12)
+
+	'('  shift 35
+	.  error
+
+
+state 27
+	stmt : IF . '(' r_expr ')' stmt  (10)
+	stmt : IF . '(' r_expr ')' stmt ELSE stmt  (11)
+
+	'('  shift 36
+	.  error
+
+
+state 28
+	stmt : INT . id ';'  (7)
+
+	id  shift 37
+	.  error
+
+
+state 29
+	stmt : PRINT . '(' id ')' ';'  (15)
+
+	'('  shift 38
+	.  error
+
+
+state 30
+	stmt : RETURN . '(' expr ')' ';'  (14)
+
+	'('  shift 39
+	.  error
+
+
+state 31
+	block_begin : '{' .  (16)
+
+	.  reduce 16
+
+
+state 32
+	function : INT id '(' arg ')' stmt .  (4)
+
+	.  reduce 4
+
+
+state 33
+	stmt : var . '=' expr ';'  (8)
+	stmt : var . '=' read_call ';'  (9)
+
+	'='  shift 40
+	.  error
+
+
+state 34
+	stmt : block_begin . block_stmt block_end  (13)
+
+	id  shift 25
+	WHILE  shift 26
+	IF  shift 27
+	INT  shift 28
+	PRINT  shift 29
+	RETURN  shift 30
+	'{'  shift 31
+	.  error
+
+	stmt  goto 41
+	var  goto 33
+	block_stmt  goto 42
+	block_begin  goto 34
+
+
+state 35
+	stmt : WHILE '(' . r_expr ')' stmt  (12)
+
+	INTEGER  shift 43
+	id  shift 25
+	'-'  shift 44
+	.  error
+
+	var  goto 45
+	const  goto 46
+	term  goto 47
+	expr  goto 48
+	b_expr  goto 49
+	u_expr  goto 50
+	r_expr  goto 51
+
+
+state 36
+	stmt : IF '(' . r_expr ')' stmt  (10)
+	stmt : IF '(' . r_expr ')' stmt ELSE stmt  (11)
+
+	INTEGER  shift 43
+	id  shift 25
+	'-'  shift 44
+	.  error
+
+	var  goto 45
+	const  goto 46
+	term  goto 47
+	expr  goto 48
+	b_expr  goto 49
+	u_expr  goto 50
+	r_expr  goto 52
+
+
+state 37
+	stmt : INT id . ';'  (7)
+
+	';'  shift 53
+	.  error
+
+
+state 38
+	stmt : PRINT '(' . id ')' ';'  (15)
+
+	id  shift 54
+	.  error
+
+
+state 39
+	stmt : RETURN '(' . expr ')' ';'  (14)
+
+	INTEGER  shift 43
+	id  shift 25
+	'-'  shift 44
+	.  error
+
+	var  goto 45
+	const  goto 46
+	term  goto 47
+	expr  goto 55
+	b_expr  goto 49
+	u_expr  goto 50
+
+
+state 40
+	stmt : var '=' . expr ';'  (8)
+	stmt : var '=' . read_call ';'  (9)
+
+	INTEGER  shift 43
+	id  shift 25
+	READ  shift 56
+	'-'  shift 44
+	.  error
+
+	var  goto 45
+	const  goto 46
+	term  goto 47
+	expr  goto 57
+	b_expr  goto 49
+	u_expr  goto 50
+	read_call  goto 58
+
+
+state 41
+	block_stmt : stmt . block_stmt  (18)
+	block_stmt : stmt .  (19)
+
+	id  shift 25
+	WHILE  shift 26
+	IF  shift 27
+	INT  shift 28
+	PRINT  shift 29
+	RETURN  shift 30
+	'{'  shift 31
+	'}'  reduce 19
+
+	stmt  goto 41
+	var  goto 33
+	block_stmt  goto 59
+	block_begin  goto 34
+
+
+state 42
+	stmt : block_begin block_stmt . block_end  (13)
+
+	'}'  shift 60
+	.  error
+
+	block_end  goto 61
+
+
+state 43
+	const : INTEGER .  (38)
+
+	.  reduce 38
+
+
+state 44
+	u_expr : '-' . term  (28)
+
+	INTEGER  shift 43
+	id  shift 25
+	.  error
+
+	var  goto 45
+	const  goto 46
+	term  goto 62
+
+
+state 45
+	term : var .  (35)
+
+	.  reduce 35
+
+
+state 46
+	term : const .  (36)
+
+	.  reduce 36
+
+
+state 47
+	expr : term .  (21)
+	b_expr : term . '+' term  (24)
+	b_expr : term . '-' term  (25)
+	b_expr : term . '*' term  (26)
+	b_expr : term . '/' term  (27)
+
+	'+'  shift 63
+	'-'  shift 64
+	'*'  shift 65
+	'/'  shift 66
+	GE  reduce 21
+	LE  reduce 21
+	EQ  reduce 21
+	NE  reduce 21
+	'>'  reduce 21
+	'<'  reduce 21
+	')'  reduce 21
+	';'  reduce 21
+
+
+state 48
+	r_expr : expr . '>' expr  (29)
+	r_expr : expr . '<' expr  (30)
+	r_expr : expr . EQ expr  (31)
+	r_expr : expr . LE expr  (32)
+	r_expr : expr . GE expr  (33)
+	r_expr : expr . NE expr  (34)
+
+	GE  shift 67
+	LE  shift 68
+	EQ  shift 69
+	NE  shift 70
+	'>'  shift 71
+	'<'  shift 72
+	.  error
+
+
+state 49
+	expr : b_expr .  (22)
+
+	.  reduce 22
+
+
+state 50
+	expr : u_expr .  (23)
+
+	.  reduce 23
+
+
+state 51
+	stmt : WHILE '(' r_expr . ')' stmt  (12)
+
+	')'  shift 73
+	.  error
+
+
+state 52
+	stmt : IF '(' r_expr . ')' stmt  (10)
+	stmt : IF '(' r_expr . ')' stmt ELSE stmt  (11)
+
+	')'  shift 74
+	.  error
+
+
+state 53
+	stmt : INT id ';' .  (7)
+
+	.  reduce 7
+
+
+state 54
+	stmt : PRINT '(' id . ')' ';'  (15)
+
+	')'  shift 75
+	.  error
+
+
+state 55
+	stmt : RETURN '(' expr . ')' ';'  (14)
+
+	')'  shift 76
+	.  error
+
+
+state 56
+	read_call : READ . '(' ')'  (20)
+
+	'('  shift 77
+	.  error
+
+
+state 57
+	stmt : var '=' expr . ';'  (8)
+
+	';'  shift 78
+	.  error
+
+
+state 58
+	stmt : var '=' read_call . ';'  (9)
+
+	';'  shift 79
+	.  error
+
+
+state 59
+	block_stmt : stmt block_stmt .  (18)
+
+	.  reduce 18
+
+
+state 60
+	block_end : '}' .  (17)
+
+	.  reduce 17
+
+
+state 61
+	stmt : block_begin block_stmt block_end .  (13)
+
+	.  reduce 13
+
+
+state 62
+	u_expr : '-' term .  (28)
+
+	.  reduce 28
+
+
+state 63
+	b_expr : term '+' . term  (24)
+
+	INTEGER  shift 43
+	id  shift 25
+	.  error
+
+	var  goto 45
+	const  goto 46
+	term  goto 80
+
+
+state 64
+	b_expr : term '-' . term  (25)
+
+	INTEGER  shift 43
+	id  shift 25
+	.  error
+
+	var  goto 45
+	const  goto 46
+	term  goto 81
+
+
+state 65
+	b_expr : term '*' . term  (26)
+
+	INTEGER  shift 43
+	id  shift 25
+	.  error
+
+	var  goto 45
+	const  goto 46
+	term  goto 82
+
+
+state 66
+	b_expr : term '/' . term  (27)
+
+	INTEGER  shift 43
+	id  shift 25
+	.  error
+
+	var  goto 45
+	const  goto 46
+	term  goto 83
+
+
+state 67
+	r_expr : expr GE . expr  (33)
+
+	INTEGER  shift 43
+	id  shift 25
+	'-'  shift 44
+	.  error
+
+	var  goto 45
+	const  goto 46
+	term  goto 47
+	expr  goto 84
+	b_expr  goto 49
+	u_expr  goto 50
+
+
+state 68
+	r_expr : expr LE . expr  (32)
+
+	INTEGER  shift 43
+	id  shift 25
+	'-'  shift 44
+	.  error
+
+	var  goto 45
+	const  goto 46
+	term  goto 47
+	expr  goto 85
+	b_expr  goto 49
+	u_expr  goto 50
+
+
+state 69
+	r_expr : expr EQ . expr  (31)
+
+	INTEGER  shift 43
+	id  shift 25
+	'-'  shift 44
+	.  error
+
+	var  goto 45
+	const  goto 46
+	term  goto 47
+	expr  goto 86
+	b_expr  goto 49
+	u_expr  goto 50
+
+
+state 70
+	r_expr : expr NE . expr  (34)
+
+	INTEGER  shift 43
+	id  shift 25
+	'-'  shift 44
+	.  error
+
+	var  goto 45
+	const  goto 46
+	term  goto 47
+	expr  goto 87
+	b_expr  goto 49
+	u_expr  goto 50
+
+
+state 71
+	r_expr : expr '>' . expr  (29)
+
+	INTEGER  shift 43
+	id  shift 25
+	'-'  shift 44
+	.  error
+
+	var  goto 45
+	const  goto 46
+	term  goto 47
+	expr  goto 88
+	b_expr  goto 49
+	u_expr  goto 50
+
+
+state 72
+	r_expr : expr '<' . expr  (30)
+
+	INTEGER  shift 43
+	id  shift 25
+	'-'  shift 44
+	.  error
+
+	var  goto 45
+	const  goto 46
+	term  goto 47
+	expr  goto 89
+	b_expr  goto 49
+	u_expr  goto 50
+
+
+state 73
+	stmt : WHILE '(' r_expr ')' . stmt  (12)
+
+	id  shift 25
+	WHILE  shift 26
+	IF  shift 27
+	INT  shift 28
+	PRINT  shift 29
+	RETURN  shift 30
+	'{'  shift 31
+	.  error
+
+	stmt  goto 90
+	var  goto 33
+	block_begin  goto 34
+
+
+state 74
+	stmt : IF '(' r_expr ')' . stmt  (10)
+	stmt : IF '(' r_expr ')' . stmt ELSE stmt  (11)
+
+	id  shift 25
+	WHILE  shift 26
+	IF  shift 27
+	INT  shift 28
+	PRINT  shift 29
+	RETURN  shift 30
+	'{'  shift 31
+	.  error
+
+	stmt  goto 91
+	var  goto 33
+	block_begin  goto 34
+
+
+state 75
+	stmt : PRINT '(' id ')' . ';'  (15)
+
+	';'  shift 92
+	.  error
+
+
+state 76
+	stmt : RETURN '(' expr ')' . ';'  (14)
+
+	';'  shift 93
+	.  error
+
+
+state 77
+	read_call : READ '(' . ')'  (20)
+
+	')'  shift 94
+	.  error
+
+
+state 78
+	stmt : var '=' expr ';' .  (8)
+
+	.  reduce 8
+
+
+state 79
+	stmt : var '=' read_call ';' .  (9)
+
+	.  reduce 9
+
+
+state 80
+	b_expr : term '+' term .  (24)
+
+	.  reduce 24
+
+
+state 81
+	b_expr : term '-' term .  (25)
+
+	.  reduce 25
+
+
+state 82
+	b_expr : term '*' term .  (26)
+
+	.  reduce 26
+
+
+state 83
+	b_expr : term '/' term .  (27)
+
+	.  reduce 27
+
+
+state 84
+	r_expr : expr GE expr .  (33)
+
+	.  reduce 33
+
+
+state 85
+	r_expr : expr LE expr .  (32)
+
+	.  reduce 32
+
+
+state 86
+	r_expr : expr EQ expr .  (31)
+
+	.  reduce 31
+
+
+state 87
+	r_expr : expr NE expr .  (34)
+
+	.  reduce 34
+
+
+state 88
+	r_expr : expr '>' expr .  (29)
+
+	.  reduce 29
+
+
+state 89
+	r_expr : expr '<' expr .  (30)
+
+	.  reduce 30
+
+
+state 90
+	stmt : WHILE '(' r_expr ')' stmt .  (12)
+
+	.  reduce 12
+
+
+state 91
+	stmt : IF '(' r_expr ')' stmt .  (10)
+	stmt : IF '(' r_expr ')' stmt . ELSE stmt  (11)
+
+	ELSE  shift 95
+	$end  reduce 10
+	id  reduce 10
+	WHILE  reduce 10
+	IF  reduce 10
+	INT  reduce 10
+	PRINT  reduce 10
+	RETURN  reduce 10
+	'{'  reduce 10
+	'}'  reduce 10
+
+
+state 92
+	stmt : PRINT '(' id ')' ';' .  (15)
+
+	.  reduce 15
+
+
+state 93
+	stmt : RETURN '(' expr ')' ';' .  (14)
+
+	.  reduce 14
+
+
+state 94
+	read_call : READ '(' ')' .  (20)
+
+	.  reduce 20
+
+
+state 95
+	stmt : IF '(' r_expr ')' stmt ELSE . stmt  (11)
+
+	id  shift 25
+	WHILE  shift 26
+	IF  shift 27
+	INT  shift 28
+	PRINT  shift 29
+	RETURN  shift 30
+	'{'  shift 31
+	.  error
+
+	stmt  goto 96
+	var  goto 33
+	block_begin  goto 34
+
+
+state 96
+	stmt : IF '(' r_expr ')' stmt ELSE stmt .  (11)
+
+	.  reduce 11
+
+
+31 terminals, 17 nonterminals
+39 grammar rules, 97 states

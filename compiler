@@ -1,0 +1,12 @@
+cd FrontEnd
+make
+./createASTandIR < ../$1
+cd ../Optimizations
+make
+./optimizations ../FrontEnd/resultingIR.ll
+cd ../CodeGen
+make
+./codegen ../Optimizations/testOpt.ll
+cd ..
+gcc -m32 -g main.c ./CodeGen/outputAssembly.s -o executable 
+echo "Compilation complete!"

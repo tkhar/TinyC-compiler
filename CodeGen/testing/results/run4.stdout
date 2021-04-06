@@ -1,0 +1,453 @@
+rm -rf ./testing/test4.ll
+rm -rf codegen
+rm -rf *.o
+rm -rf *.s
+rm -rf a.out
+g++ `llvm-config --cxxflags --ldflags --libs core` codegen.c reg_alloc.c assembly_gen.c -o codegen
+clang -S -emit-llvm ./testing/test4.c -o ./testing/test4.ll
+./codegen ./testing/test4.ll
+
+ --- Initialization directives ----
+
+	.globl f
+	.type f, @function
+f:
+	pushl %ebp
+	movl %esp, %ebp
+
+--------------------------------
+
+ --- Computing register allocation --- 
+
+
+		Interval: [1 2]
+
+ Calling ExpireOldIntervals()!
+Interval i: [1 2]
+
+ --- Done expiring intervals --- 
+
+Inserting new interval into active set
+
+		Contents of active:
+[1 2], 
+
+
+		Interval: [4 5]
+
+ Calling ExpireOldIntervals()!
+Interval i: [4 5]
+Will expire interval [1 2] with register 2
+
+ --- Done expiring intervals --- 
+
+Inserting new interval into active set
+
+		Contents of active:
+[4 5], 
+
+
+		Interval: [6 7]
+
+ Calling ExpireOldIntervals()!
+Interval i: [6 7]
+Will expire interval [4 5] with register 2
+
+ --- Done expiring intervals --- 
+
+Inserting new interval into active set
+
+		Contents of active:
+[6 7], 
+
+
+		Interval: [8 9]
+
+ Calling ExpireOldIntervals()!
+Interval i: [8 9]
+Will expire interval [6 7] with register 2
+
+ --- Done expiring intervals --- 
+
+Inserting new interval into active set
+
+		Contents of active:
+[8 9], 
+
+
+		Interval: [10 11]
+
+ Calling ExpireOldIntervals()!
+Interval i: [10 11]
+Will expire interval [8 9] with register 2
+
+ --- Done expiring intervals --- 
+
+Inserting new interval into active set
+
+		Contents of active:
+[10 11], 
+
+
+		Interval: [11 12]
+
+ Calling ExpireOldIntervals()!
+Interval i: [11 12]
+Stopping expiration procedures at interval [10 11]
+
+Inserting new interval into active set
+
+		Contents of active:
+[10 11], [11 12], 
+
+
+		Interval: [14 16]
+
+ Calling ExpireOldIntervals()!
+Interval i: [14 16]
+Will expire interval [10 11] with register 2
+Will expire interval [11 12] with register 3
+
+ --- Done expiring intervals --- 
+
+Inserting new interval into active set
+
+		Contents of active:
+[14 16], 
+
+
+		Interval: [15 16]
+
+ Calling ExpireOldIntervals()!
+Interval i: [15 16]
+Stopping expiration procedures at interval [14 16]
+
+Inserting new interval into active set
+
+		Contents of active:
+[14 16], [15 16], 
+
+
+		Interval: [16 17]
+
+ Calling ExpireOldIntervals()!
+Interval i: [16 17]
+Stopping expiration procedures at interval [14 16]
+
+Inserting new interval into active set
+
+		Contents of active:
+[14 16], [15 16], [16 17], 
+
+
+		Interval: [18 19]
+
+ Calling ExpireOldIntervals()!
+Interval i: [18 19]
+Will expire interval [14 16] with register 2
+Will expire interval [15 16] with register 3
+Will expire interval [16 17] with register 4
+
+ --- Done expiring intervals --- 
+
+Inserting new interval into active set
+
+		Contents of active:
+[18 19], 
+
+
+		Interval: [19 20]
+
+ Calling ExpireOldIntervals()!
+Interval i: [19 20]
+Stopping expiration procedures at interval [18 19]
+
+Inserting new interval into active set
+
+		Contents of active:
+[18 19], [19 20], 
+
+
+		Interval: [21 22]
+
+ Calling ExpireOldIntervals()!
+Interval i: [21 22]
+Will expire interval [18 19] with register 2
+Will expire interval [19 20] with register 3
+
+ --- Done expiring intervals --- 
+
+Inserting new interval into active set
+
+		Contents of active:
+[21 22], 
+
+
+		Interval: [22 23]
+
+ Calling ExpireOldIntervals()!
+Interval i: [22 23]
+Stopping expiration procedures at interval [21 22]
+
+Inserting new interval into active set
+
+		Contents of active:
+[21 22], [22 23], 
+
+
+		Interval: [24 25]
+
+ Calling ExpireOldIntervals()!
+Interval i: [24 25]
+Will expire interval [21 22] with register 2
+Will expire interval [22 23] with register 3
+
+ --- Done expiring intervals --- 
+
+Inserting new interval into active set
+
+		Contents of active:
+[24 25], 
+
+
+		Interval: [25 28]
+
+ Calling ExpireOldIntervals()!
+Interval i: [25 28]
+Stopping expiration procedures at interval [24 25]
+
+Inserting new interval into active set
+
+		Contents of active:
+[24 25], [25 28], 
+
+
+		Interval: [26 27]
+
+ Calling ExpireOldIntervals()!
+Interval i: [26 27]
+Will expire interval [24 25] with register 2
+Stopping expiration procedures at interval [25 28]
+
+Inserting new interval into active set
+
+		Contents of active:
+[26 27], [25 28], 
+
+
+		Interval: [27 28]
+
+ Calling ExpireOldIntervals()!
+Interval i: [27 28]
+Stopping expiration procedures at interval [26 27]
+
+Inserting new interval into active set
+
+		Contents of active:
+[26 27], [25 28], [27 28], 
+
+
+		Interval: [28 29]
+
+ Calling ExpireOldIntervals()!
+Interval i: [28 29]
+Will expire interval [26 27] with register 2
+Stopping expiration procedures at interval [25 28]
+
+Inserting new interval into active set
+
+		Contents of active:
+[25 28], [27 28], [28 29], 
+
+
+ --- New Basic Block --- 
+: Interval: [1 2]
+: Interval: [4 5]
+: Interval: [6 7]
+: Interval: [8 9]
+: Interval: [10 11]
+: Interval: [11 12]
+: Interval: [14 16]
+: Interval: [15 16]
+: Interval: [16 17]
+: Interval: [18 19]
+: Interval: [19 20]
+: Interval: [21 22]
+: Interval: [22 23]
+: Interval: [24 25]
+: Interval: [25 28]
+: Interval: [26 27]
+: Interval: [27 28]
+: Interval: [28 29]
+
+ -------------------------- 
+
+ --- New Basic Block --- 
+
+ -------------------------- 
+
+ --- New Basic Block --- 
+
+ -------------------------- 
+
+ ------------ Done ---------------------
+
+ --- Allocated Registers ---
+
+ --> Register: 2
+ --> Register: 2
+ --> Register: 2
+ --> Register: 2
+ --> Register: 2
+ --> Register: 3
+ --> Register: 2
+ --> Register: 3
+ --> Register: 4
+ --> Register: 2
+ --> Register: 3
+ --> Register: 2
+ --> Register: 3
+ --> Register: 2
+ --> Register: 3
+ --> Register: 2
+ --> Register: 4
+ --> Register: 2
+
+ -----------------------------
+
+--- Offset map calculations ---
+
+ Local Memory size: -32
+:	 8
+:	 8
+:	 -4
+:	 -4
+:	 -4
+:	 8
+:	 -4
+:	 -4
+:	 -8
+:	 8
+:	 -4
+:	 -12
+:	 -4
+:	 -16
+:	 8
+:	 -20
+:	 -4
+:	 -24
+:	 8
+:	 -28
+:	 -32
+
+ ------------------------------
+
+--- Offset map calculations ---
+
+ Local Memory size: -32
+:	 8
+:	 8
+:	 -4
+:	 -4
+:	 -4
+:	 8
+:	 -4
+:	 -4
+:	 -8
+:	 8
+:	 -4
+:	 -12
+:	 -4
+:	 -16
+:	 8
+:	 -20
+:	 -4
+:	 -24
+:	 8
+:	 -28
+:	 -32
+
+ ------------------------------
+
+--- Offset map calculations ---
+
+ Local Memory size: -32
+:	 8
+:	 8
+:	 -4
+:	 -4
+:	 -4
+:	 8
+:	 -4
+:	 -4
+:	 -8
+:	 8
+:	 -4
+:	 -12
+:	 -4
+:	 -16
+:	 8
+:	 -20
+:	 -4
+:	 -24
+:	 8
+:	 -28
+:	 -32
+
+ ------------------------------
+
+ --- Termination directives ----------
+	movl %ebp, %esp
+	popl %ebp
+	ret
+
+------------------------------------
+
+Generating assembly code for function! 
+
+LocalMem: -32
+
+Calling print()!
+
+Pushed parameter 
+
+Calling print()!
+
+Pushed parameter 
+
+Calling print()!
+
+Pushed parameter 
+
+Calling print()!
+
+Pushed parameter 
+
+Calling print()!
+
+Pushed parameter 
+
+Calling print()!
+
+Pushed parameter 
+
+Calling print()!
+
+Pushed parameter 
+
+ -------------------------------------- 
+gcc -g -m32 main.c outputAssembly.s
+10
+3
+-13
+-30
+0
+-20
+11111
+11
+rm -rf ''.ll
+rm -rf codegen
+rm -rf *.o
+rm -rf *.s
+rm -rf a.out
+/net/ifs-users/tkhar/Compilers/CodeGen/testing

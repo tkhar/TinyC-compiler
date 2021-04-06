@@ -1,0 +1,110 @@
+rm -rf ./testing/test5.ll
+rm -rf codegen
+rm -rf *.o
+rm -rf *.s
+rm -rf a.out
+g++ `llvm-config --cxxflags --ldflags --libs core` codegen.c reg_alloc.c assembly_gen.c -o codegen
+clang -S -emit-llvm ./testing/test5.c -o ./testing/test5.ll
+./codegen ./testing/test5.ll
+
+ --- Initialization directives ----
+
+	.globl f
+	.type f, @function
+f:
+	pushl %ebp
+	movl %esp, %ebp
+
+--------------------------------
+
+ --- Computing register allocation --- 
+
+
+		Interval: [1 2]
+
+ Calling ExpireOldIntervals()!
+Interval i: [1 2]
+
+ --- Done expiring intervals --- 
+
+Inserting new interval into active set
+
+		Contents of active:
+[1 2], 
+
+
+		Interval: [2 3]
+
+ Calling ExpireOldIntervals()!
+Interval i: [2 3]
+Stopping expiration procedures at interval [1 2]
+
+Inserting new interval into active set
+
+		Contents of active:
+[1 2], [2 3], 
+
+
+		Interval: [4 5]
+
+ Calling ExpireOldIntervals()!
+Interval i: [4 5]
+Will expire interval [1 2] with register 2
+Will expire interval [2 3] with register 3
+
+ --- Done expiring intervals --- 
+
+Inserting new interval into active set
+
+		Contents of active:
+[4 5], 
+
+
+ --- New Basic Block --- 
+: Interval: [1 2]
+: Interval: [2 3]
+: Interval: [4 5]
+
+ -------------------------- 
+
+ ------------ Done ---------------------
+
+ --- Allocated Registers ---
+
+ --> Register: 2
+ --> Register: 3
+ --> Register: 2
+
+ -----------------------------
+
+--- Offset map calculations ---
+
+ Local Memory size: 0
+:	 8
+:	 8
+:	 8
+:	 8
+:	 8
+
+ ------------------------------
+
+ --- Termination directives ----------
+	movl %ebp, %esp
+	popl %ebp
+	ret
+
+------------------------------------
+
+Generating assembly code for function! 
+
+LocalMem: 0
+
+ -------------------------------------- 
+gcc -g -m32 main.c outputAssembly.s
+5
+rm -rf ''.ll
+rm -rf codegen
+rm -rf *.o
+rm -rf *.s
+rm -rf a.out
+/net/ifs-users/tkhar/Compilers/CodeGen/testing

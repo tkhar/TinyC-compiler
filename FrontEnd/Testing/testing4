@@ -1,0 +1,12 @@
+extern int read(void);
+extern void print(int);
+
+int function (int variable_1) {
+	int variable_2;
+	int variable_3;
+	if (variable_3 * 10 > 10 - 5) {
+		int variable_4;
+		print(variable_1);
+	}
+	return (variable_1);
+}

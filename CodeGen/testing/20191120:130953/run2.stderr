@@ -1,0 +1,63 @@
+assembly_gen.c: In function ‘void assembly_code_generator(LLVMValueRef, std::map<LLVMOpaqueValue*, int>&, std::map<LLVMOpaqueValue*, int>&, std::map<LLVMOpaqueBasicBlock*, char*>&, int)’:
+assembly_gen.c:288:18: warning: ISO C++ forbids converting a string constant to ‘char*’ [-Wwrite-strings]
+  288 |      operation = "cmp";
+      |                  ^~~~~
+assembly_gen.c:291:18: warning: ISO C++ forbids converting a string constant to ‘char*’ [-Wwrite-strings]
+  291 |      operation = "addl";
+      |                  ^~~~~~
+assembly_gen.c:294:18: warning: ISO C++ forbids converting a string constant to ‘char*’ [-Wwrite-strings]
+  294 |      operation = "subl";
+      |                  ^~~~~~
+assembly_gen.c:297:18: warning: ISO C++ forbids converting a string constant to ‘char*’ [-Wwrite-strings]
+  297 |      operation = "imull";
+      |                  ^~~~~~~
+  %4 = load i32, i32* %2, align 4  %5 = add nsw i32 %4, 10  %6 = load i32, i32* %3, align 4  %7 = icmp eq i32 %6, 20  %11 = load i32, i32* %3, align 4  %4 = load i32, i32* %2, align 4  %5 = add nsw i32 %4, 10  %6 = load i32, i32* %3, align 4  %7 = icmp eq i32 %6, 20  %11 = load i32, i32* %3, align 4
+Instruction examined:   %2 = alloca i32, align 4
+
+Instruction examined:   %3 = alloca i32, align 4
+
+Instruction examined:   store i32 %0, i32* %2, align 4
+A store instruction: storing argument!
+
+Instruction examined:   store i32 10, i32* %2, align 4
+A store instruction: 
+Instruction examined:   %4 = load i32, i32* %2, align 4
+offset of instruction: 8
+
+Instruction examined:   %5 = add nsw i32 %4, 10
+
+Instruction examined:   store i32 %5, i32* %3, align 4
+A store instruction: updating local mem: 0 moving to location: -4
+
+Instruction examined:   %6 = load i32, i32* %3, align 4
+offset of instruction: -4
+
+Instruction examined:   %7 = icmp eq i32 %6, 20
+
+Instruction examined:   br i1 %7, label %8, label %9
+i32 %0  %2 = alloca i32, align 4  %3 = alloca i32, align 4  %4 = load i32, i32* %2, align 4  %5 = add nsw i32 %4, 10  %6 = load i32, i32* %3, align 4  %7 = icmp eq i32 %6, 20
+Instruction examined:   store i32 1, i32* %3, align 4
+A store instruction: 
+Instruction examined:   br label %10
+i32 %0  %2 = alloca i32, align 4  %3 = alloca i32, align 4  %4 = load i32, i32* %2, align 4  %5 = add nsw i32 %4, 10  %6 = load i32, i32* %3, align 4  %7 = icmp eq i32 %6, 20
+Instruction examined:   store i32 2, i32* %3, align 4
+A store instruction: 
+Instruction examined:   br label %10
+i32 %0  %2 = alloca i32, align 4  %3 = alloca i32, align 4  %4 = load i32, i32* %2, align 4  %5 = add nsw i32 %4, 10  %6 = load i32, i32* %3, align 4  %7 = icmp eq i32 %6, 20
+Instruction examined:   %11 = load i32, i32* %3, align 4
+offset of instruction: -4
+
+Instruction examined:   ret i32 %11
+i32 %0  %2 = alloca i32, align 4  %3 = alloca i32, align 4  %4 = load i32, i32* %2, align 4  %5 = add nsw i32 %4, 10  %6 = load i32, i32* %3, align 4  %7 = icmp eq i32 %6, 20  %11 = load i32, i32* %3, align 4
+Conditional branch:   br i1 %7, label %8, label %9
+Basic blocks: 
+; <label>:9:                                      ; preds = %1
+  store i32 2, i32* %3, align 4
+  br label %10
+
+
+; <label>:8:                                      ; preds = %1
+  store i32 1, i32* %3, align 4
+  br label %10
+
+Labels: .B1 .B2

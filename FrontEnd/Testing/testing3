@@ -1,0 +1,14 @@
+extern int read(void);
+extern void print(int);
+
+int function () {
+	int a;
+	a = 3;
+	if (a > 2) {
+		a = a + 1;
+	}
+	else {
+		a = 0;
+	}
+	return (a);
+}

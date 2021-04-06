@@ -1,0 +1,24 @@
+assembly_gen.c: In function ‘void assembly_code_generator(LLVMValueRef, std::map<LLVMOpaqueValue*, int>&, std::map<LLVMOpaqueValue*, int>&, std::map<LLVMOpaqueBasicBlock*, char*>&, int)’:
+assembly_gen.c:288:18: warning: ISO C++ forbids converting a string constant to ‘char*’ [-Wwrite-strings]
+  288 |      operation = "cmp";
+      |                  ^~~~~
+assembly_gen.c:291:18: warning: ISO C++ forbids converting a string constant to ‘char*’ [-Wwrite-strings]
+  291 |      operation = "addl";
+      |                  ^~~~~~
+assembly_gen.c:294:18: warning: ISO C++ forbids converting a string constant to ‘char*’ [-Wwrite-strings]
+  294 |      operation = "subl";
+      |                  ^~~~~~
+assembly_gen.c:297:18: warning: ISO C++ forbids converting a string constant to ‘char*’ [-Wwrite-strings]
+  297 |      operation = "imull";
+      |                  ^~~~~~~
+  %3 = load i32, i32* %2, align 4  %3 = load i32, i32* %2, align 4
+Instruction examined:   %2 = alloca i32, align 4
+
+Instruction examined:   store i32 %0, i32* %2, align 4
+A store instruction: storing argument!
+
+Instruction examined:   %3 = load i32, i32* %2, align 4
+offset of instruction: 8
+
+Instruction examined:   ret i32 %3
+i32 %0  %2 = alloca i32, align 4  %3 = load i32, i32* %2, align 4

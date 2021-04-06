@@ -1,0 +1,6 @@
+cd ..
+make TEST='./testing/test4' myasm
+./a.out <<< -3
+make clean
+cd -
+

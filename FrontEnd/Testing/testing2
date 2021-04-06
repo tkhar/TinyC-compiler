@@ -1,0 +1,27 @@
+extern int read(void);
+extern void print(int);
+
+int function (int a) { 
+	int b;
+	int c;
+	b = 3;
+	c = 10 + b;
+	c = read();
+	print(c);
+	b = a+1;
+
+	if (a < 10) {
+		b = b+1;
+	}
+
+	while (b < 20) {
+		int d;
+		b = b+1;
+		if (a/2 < b+20) {
+			b = b+1;
+			a = c;
+		}
+	}
+
+	return (a+b);
+}

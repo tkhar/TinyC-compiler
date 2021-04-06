@@ -1,0 +1,120 @@
+assembly_gen.c: In function ‘void assembly_code_generator(LLVMValueRef, std::map<LLVMOpaqueValue*, int>&, std::map<LLVMOpaqueValue*, int>&, std::map<LLVMOpaqueBasicBlock*, char*>&, int)’:
+assembly_gen.c:288:18: warning: ISO C++ forbids converting a string constant to ‘char*’ [-Wwrite-strings]
+  288 |      operation = "cmp";
+      |                  ^~~~~
+assembly_gen.c:291:18: warning: ISO C++ forbids converting a string constant to ‘char*’ [-Wwrite-strings]
+  291 |      operation = "addl";
+      |                  ^~~~~~
+assembly_gen.c:294:18: warning: ISO C++ forbids converting a string constant to ‘char*’ [-Wwrite-strings]
+  294 |      operation = "subl";
+      |                  ^~~~~~
+assembly_gen.c:297:18: warning: ISO C++ forbids converting a string constant to ‘char*’ [-Wwrite-strings]
+  297 |      operation = "imull";
+      |                  ^~~~~~~
+  %5 = call i32 (...) @read()  %6 = load i32, i32* %4, align 4  %7 = load i32, i32* %2, align 4  %8 = load i32, i32* %3, align 4  %10 = load i32, i32* %3, align 4  %11 = icmp slt i32 %10, 10  %13 = load i32, i32* %3, align 4  %14 = load i32, i32* %2, align 4  %15 = add nsw i32 %14, 2  %16 = load i32, i32* %3, align 4  %17 = add nsw i32 %16, 1  %19 = load i32, i32* %2, align 4  %20 = load i32, i32* %3, align 4  %5 = call i32 (...) @read()  %6 = load i32, i32* %4, align 4  %7 = load i32, i32* %2, align 4  %8 = load i32, i32* %3, align 4  %10 = load i32, i32* %3, align 4  %11 = icmp slt i32 %10, 10  %13 = load i32, i32* %3, align 4  %14 = load i32, i32* %2, align 4  %15 = add nsw i32 %14, 2  %16 = load i32, i32* %3, align 4  %17 = add nsw i32 %16, 1  %19 = load i32, i32* %2, align 4  %20 = load i32, i32* %3, align 4
+Instruction examined:   %2 = alloca i32, align 4
+
+Instruction examined:   %3 = alloca i32, align 4
+
+Instruction examined:   %4 = alloca i32, align 4
+
+Instruction examined:   store i32 %0, i32* %2, align 4
+A store instruction: storing argument!
+
+Instruction examined:   store i32 1, i32* %3, align 4
+A store instruction: updating local mem: 0
+Instruction examined:   store i32 0, i32* %2, align 4
+A store instruction: 
+Instruction examined:   %5 = call i32 (...) @read()
+
+Instruction examined:   store i32 %5, i32* %4, align 4
+A store instruction: updating local mem: -4 moving to location: -8
+
+Instruction examined:   %6 = load i32, i32* %4, align 4
+offset of instruction: -8
+
+Instruction examined:   call void @print(i32 %6)
+
+Instruction examined:   %7 = load i32, i32* %2, align 4
+offset of instruction: 8
+
+Instruction examined:   call void @print(i32 %7)
+
+Instruction examined:   %8 = load i32, i32* %3, align 4
+offset of instruction: -4
+
+Instruction examined:   call void @print(i32 %8)
+
+Instruction examined:   br label %9
+i32 %0  %2 = alloca i32, align 4  %3 = alloca i32, align 4  %4 = alloca i32, align 4  %5 = call i32 (...) @read()  %6 = load i32, i32* %4, align 4  %7 = load i32, i32* %2, align 4  %8 = load i32, i32* %3, align 4
+Instruction examined:   %10 = load i32, i32* %3, align 4
+offset of instruction: -4
+
+Instruction examined:   %11 = icmp slt i32 %10, 10
+
+Instruction examined:   br i1 %11, label %12, label %18
+i32 %0  %2 = alloca i32, align 4  %3 = alloca i32, align 4  %4 = alloca i32, align 4  %5 = call i32 (...) @read()  %6 = load i32, i32* %4, align 4  %7 = load i32, i32* %2, align 4  %8 = load i32, i32* %3, align 4  %10 = load i32, i32* %3, align 4  %11 = icmp slt i32 %10, 10
+Instruction examined:   %13 = load i32, i32* %3, align 4
+offset of instruction: -4
+
+Instruction examined:   call void @print(i32 %13)
+
+Instruction examined:   %14 = load i32, i32* %2, align 4
+offset of instruction: 8
+
+Instruction examined:   %15 = add nsw i32 %14, 2
+
+Instruction examined:   store i32 %15, i32* %2, align 4
+A store instruction:  moving to location: 8
+
+Instruction examined:   %16 = load i32, i32* %3, align 4
+offset of instruction: -4
+
+Instruction examined:   %17 = add nsw i32 %16, 1
+
+Instruction examined:   store i32 %17, i32* %3, align 4
+A store instruction:  moving to location: -4
+
+Instruction examined:   br label %9
+i32 %0  %2 = alloca i32, align 4  %3 = alloca i32, align 4  %4 = alloca i32, align 4  %5 = call i32 (...) @read()  %6 = load i32, i32* %4, align 4  %7 = load i32, i32* %2, align 4  %8 = load i32, i32* %3, align 4  %10 = load i32, i32* %3, align 4  %11 = icmp slt i32 %10, 10  %13 = load i32, i32* %3, align 4  %14 = load i32, i32* %2, align 4  %15 = add nsw i32 %14, 2  %16 = load i32, i32* %3, align 4  %17 = add nsw i32 %16, 1
+Instruction examined:   %19 = load i32, i32* %2, align 4
+offset of instruction: 8
+
+Instruction examined:   call void @print(i32 %19)
+
+Instruction examined:   %20 = load i32, i32* %3, align 4
+offset of instruction: -4
+
+Instruction examined:   ret i32 %20
+i32 %0  %2 = alloca i32, align 4  %3 = alloca i32, align 4  %4 = alloca i32, align 4  %5 = call i32 (...) @read()  %6 = load i32, i32* %4, align 4  %7 = load i32, i32* %2, align 4  %8 = load i32, i32* %3, align 4  %10 = load i32, i32* %3, align 4  %11 = icmp slt i32 %10, 10  %13 = load i32, i32* %3, align 4  %14 = load i32, i32* %2, align 4  %15 = add nsw i32 %14, 2  %16 = load i32, i32* %3, align 4  %17 = add nsw i32 %16, 1  %19 = load i32, i32* %2, align 4  %20 = load i32, i32* %3, align 4
+Parameter:   %6 = load i32, i32* %4, align 4
+
+Parameter:   %7 = load i32, i32* %2, align 4
+
+Parameter:   %8 = load i32, i32* %3, align 4
+
+Conditional branch:   br i1 %11, label %12, label %18
+Basic blocks: 
+; <label>:18:                                     ; preds = %9
+  %19 = load i32, i32* %2, align 4
+  call void @print(i32 %19)
+  %20 = load i32, i32* %3, align 4
+  ret i32 %20
+
+
+; <label>:12:                                     ; preds = %9
+  %13 = load i32, i32* %3, align 4
+  call void @print(i32 %13)
+  %14 = load i32, i32* %2, align 4
+  %15 = add nsw i32 %14, 2
+  store i32 %15, i32* %2, align 4
+  %16 = load i32, i32* %3, align 4
+  %17 = add nsw i32 %16, 1
+  store i32 %17, i32* %3, align 4
+  br label %9
+
+Labels: .B2 .B3
+
+Parameter:   %13 = load i32, i32* %3, align 4
+
+Parameter:   %19 = load i32, i32* %2, align 4
